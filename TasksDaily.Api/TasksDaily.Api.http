@@ -1,0 +1,6 @@
+@TasksDaily.Api_HostAddress = http://localhost:5047
+
+GET {{TasksDaily.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
