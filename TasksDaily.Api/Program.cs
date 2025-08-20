@@ -28,12 +28,16 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
   app.MapOpenApi();
-  app.MapScalarApiReference();
-
+  app.MapScalarApiReference(options =>
+  {
+    options.Title = "Meine API";
+  });
+  app.UseStaticFiles();
 }
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors();
 
 app.Run();

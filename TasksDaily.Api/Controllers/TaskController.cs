@@ -10,9 +10,15 @@ namespace TasksDaily.Api.Controllers
   public class TaskController : ControllerBase
   {
     [HttpGet("dummy")]
+    [Produces(typeof(TaskResponse))]
     public IActionResult Get(ApiVersion version)
     {
-      return Ok(new { message = $"This is the version {version.ToString()}" });
+      return Ok(new TaskResponse { Message = $"This is the version {version.ToString()}" });
     }
+  }
+
+  public class TaskResponse
+  {
+    public required string Message { get; set; }
   }
 }

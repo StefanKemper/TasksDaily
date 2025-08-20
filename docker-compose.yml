@@ -1,0 +1,12 @@
+services:
+  frontend:
+    build: ./TasksDaily.UI
+    image: skemper111/tasks-daily:ui-latest
+    ports:
+      - "8083:8080"
+
+  api:
+    build: ./TasksDaily.API
+    image: skemper111/tasks-daily:latest
+    ports:
+      - "8082:8080"

@@ -3,10 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --proxy-config proxy.conf.json",
+    "build": "ng build --base-href=/tasks/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker-clean": "docker rmi -f tasks-daily:ui-latest",
+    "docker-build": "docker build -t tasks-daily:ui-latest . && docker tag tasks-daily:ui-latest skemper111/tasks-daily:ui-latest",
+    "docker-push": "cd ..&& docker compose push"
   },
   "private": true,
   "dependencies": {
