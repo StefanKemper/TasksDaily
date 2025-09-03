@@ -1,9 +1,9 @@
 {
-  "runtime": "Net80",
+  "runtime": "Net90",
   "defaultVariables": null,
   "documentGenerator": {
     "fromDocument": {
-      "url": "https://localhost:7052/tasksdailyapi--v1.json",
+      "url": "https://localhost:7052/openapi/v1.json",
       "output": null,
       "newLineBehavior": "Auto"
     }
@@ -29,14 +29,15 @@
       "exportTypes": true,
       "wrapDtoExceptions": false,
       "exceptionClass": "ApiException",
-      "clientBaseClass": null,
+      "clientBaseClass": "AuthorizedApiBase",
+      "configurationClass": null,
+      "extensionCode": "../TasksDaily.UI/src/generated/authorized-api-base.ts",
+      "useTransformOptionsMethod": true,
       "wrapResponses": false,
       "wrapResponseMethods": [],
       "generateResponseClasses": true,
       "responseClass": "SwaggerResponse",
       "protectedMethods": [],
-      "configurationClass": null,
-      "useTransformOptionsMethod": false,
       "useTransformResultMethod": false,
       "generateDtoTypes": true,
       "operationGenerationMode": "MultipleClientsFromOperationId",
@@ -47,7 +48,6 @@
       "useLeafType": false,
       "classTypes": [],
       "extendedClasses": [],
-      "extensionCode": null,
       "generateDefaultValues": true,
       "excludedTypeNames": [],
       "excludedParameterNames": [],

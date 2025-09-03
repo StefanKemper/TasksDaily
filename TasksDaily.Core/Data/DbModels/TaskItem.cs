@@ -11,15 +11,17 @@
 
     public PriorityLevel Priority { get; set; }
 
-    public string? ReferenceLink { get; set; }
-
     public bool IsArchived { get; set; } = false;
 
     // FK und Navigation
-    public int? CategoryId { get; set; }
-    public Category? Category { get; set; }
+    public int CategoryId { get; set; }
+    public required Category Category { get; set; }
 
-    public int? TimeSlotId { get; set; }
+    public int UserId { get; set; }
+    public required User User { get; set; }
+
+    //public string? ReferenceLink { get; set; }
+    //public int? TimeSlotId { get; set; }
     //public TimeSlot? TimeSlot { get; set; }
   }
 }

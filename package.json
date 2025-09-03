@@ -1,0 +1,12 @@
+{
+  "name": "tasks-daily.ui",
+  "version": "0.0.0",
+  "scripts": {
+    "docker-clean": "docker rmi -f tasks-daily:api-latest",
+    "docker-tag": "docker tag tasks-daily:api-latest skemper111/tasks-daily:api-latest",
+    "docker-build-step": "docker build -t tasks-daily:api-latest .",
+    "docker-build": "npm run docker-clean && npm run docker-build-step && npm run docker-tag",
+    "docker-push": "cd .. && docker compose push"
+  },
+  "private": true
+}

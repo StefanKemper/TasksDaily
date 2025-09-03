@@ -4,11 +4,13 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --base-href=/tasks/",
+    "build": "ng build --base-href=/tasks/ --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "docker-clean": "docker rmi -f tasks-daily:ui-latest",
-    "docker-build": "docker build -t tasks-daily:ui-latest . && docker tag tasks-daily:ui-latest skemper111/tasks-daily:ui-latest",
+    "docker-clean": "docker rmi skemper111/tasks-daily:ui-latest && docker rmi tasks-daily:ui-latest",
+    "docker-tag": "docker tag tasks-daily:ui-latest skemper111/tasks-daily:ui-latest",
+    "docker-build-step": "docker build -t tasks-daily:ui-latest .",
+    "docker-build": "npm run docker-clean && npm run docker-build-step && npm run docker-tag",
     "docker-push": "cd ..&& docker compose push"
   },
   "private": true,
@@ -20,6 +22,7 @@
     "@angular/platform-browser": "^20.1.7",
     "@angular/platform-browser-dynamic": "^20.1.7",
     "@angular/router": "^20.1.7",
+    "angular-auth-oidc-client": "^19.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

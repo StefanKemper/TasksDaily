@@ -7,20 +7,34 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
+import { AuthorizationHeaderProvider } from "./authorization-header-provider";
 import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
-import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { Observable, from as _observableFrom, throwError as _observableThrow, of as _observableOf } from 'rxjs';
 import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angular/common/http';
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
+export class AuthorizedApiBase {
+  private headerProvider: AuthorizationHeaderProvider;
+
+  constructor() {
+    this.headerProvider = new AuthorizationHeaderProvider();
+  }
+
+  protected transformOptions = (options: any): Promise<any> => {
+    return this.headerProvider.getAuthorizationHeader(options)
+  };
+}
+
 @Injectable()
-export class Client {
+export class Client extends AuthorizedApiBase {
     private http: HttpClient;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
     constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        super();
         this.http = http;
         this.baseUrl = baseUrl ?? "https://localhost:7052/";
     }
@@ -43,7 +57,9 @@ export class Client {
             })
         };
 
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+        return _observableFrom(this.transformOptions(options_)).pipe(_observableMergeMap(transformedOptions_ => {
+            return this.http.request("get", url_, transformedOptions_);
+        })).pipe(_observableMergeMap((response_: any) => {
             return this.processDummy(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof HttpResponseBase) {
