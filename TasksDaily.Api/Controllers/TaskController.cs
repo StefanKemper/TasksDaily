@@ -15,6 +15,9 @@ namespace TasksDaily.Api.Controllers
     [Authorize(Roles = "todo")]
     public IActionResult Get(ApiVersion version)
     {
+      var userDto = new Core.BLL.Dto.UserDto(User);
+
+
       return Ok(new TaskResponse { Message = $"This is the version {version.ToString()}" });
     }
   }

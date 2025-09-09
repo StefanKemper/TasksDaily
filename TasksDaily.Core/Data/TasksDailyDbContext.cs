@@ -12,7 +12,6 @@ namespace TasksDaily.Core.Data
 
 
     // DbSets für alle DbModels im Ordner "DbModels"
-    public DbSet<User> Users { get; set; }
     public DbSet<TaskItem> TaskItems { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Tag> Tags { get; set; }

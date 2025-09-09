@@ -31,7 +31,6 @@ internal class Program
       })
     .AddMvc();
 
-
     var coreAssembly = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Single(a => a.Name != null && a.Name.Contains("TasksDaily.Core"));
     builder.Services.AddAutoMapper(cfg => { }, Assembly.Load(coreAssembly));
 

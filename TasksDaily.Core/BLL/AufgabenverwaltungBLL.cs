@@ -14,7 +14,7 @@ namespace TasksDaily.Core.BLL
       this.aufgabenverwaltungDataService = aufgabenverwaltungDataService;
     }
 
-    public async Task AddTaskItemAsync(Dto.TaskItemDto taskItemDto)
+    public async Task AddTaskItemAsync(Dto.TaskItemDto taskItemDto, Guid userId)
     {
       var task = new TaskItem
       {
@@ -22,7 +22,11 @@ namespace TasksDaily.Core.BLL
         Description = taskItemDto.Description,
         DueDate = taskItemDto.DueDate,
         Priority = taskItemDto.Priority,
-        Category = 
+        CategoryId = taskItemDto.CategoryId,
+        IsArchived = false,
+        UserId = userId
+
+
       };
 
       await aufgabenverwaltungDataService.AddTaskItemAsync(task);
